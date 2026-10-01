@@ -1,0 +1,10 @@
+# Copy to ~/.cloudflared/config.yml and fill in after `cloudflared tunnel create drawthings-bridge`
+tunnel: drawthings-bridge
+credentials-file: /Users/YOUR_USER/.cloudflared/TUNNEL_ID.json
+
+ingress:
+  # Only the MCP endpoint is exposed. Draw Things itself (port 7860) never is.
+  - hostname: drawthings.YOUR_DOMAIN.com
+    path: ^/mcp(/.*)?$
+    service: http://127.0.0.1:8787
+  - service: http_status:404
